@@ -24,9 +24,6 @@ int* intercala2(int* v1, int l1, int r1, int* v2, int l2, int r2){
     while(i2 <= r2)
         v3[i3++] = v2[i2++];
 
-    free(v1);
-    free(v2);
-    
     return v3;
 }
 
