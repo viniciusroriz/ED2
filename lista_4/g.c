@@ -37,9 +37,9 @@ void quickSelect(int *v, int l, int r, int x){
     if (j == x)
         return;
     if (j < x)
-        quickSelect(v, j + 1, r, x);
+        quickSelect(v, j+1, r, x);
     else
-        quickSelect(v, l, j - 1, x);
+        quickSelect(v, l, j-1, x);
 }
 
 static void quicksortM3(Item *V,int l, int r){
@@ -72,22 +72,26 @@ static void insertionsort(Item *v, int l, int r){
     }
 } 
 
-void quicksortM3insertion(Item *V,int l,int r){
+void quicksortm3insertion(Item *V,int l,int r){
     quicksortM3(V,l,r);
     insertionsort(V,l,r);
 }
 
 int main(void){
-    int x, n, p, inicio, fim;
+    int x, n, p, inicio, fim, aux=0;
 
-    scanf("%d", &n);
-    scanf("%d", &p);
-    scanf("%d", &x);
+    scanf("%d", &n); // qtd produtos
+    scanf("%d", &p); // pag apresentada 
+    scanf("%d", &x); // qtd por pagina
 
-    inicio = p*x;
+    inicio = p*x; 
     fim = inicio + x;
-    if(fim > n)
-        fim = n;
+
+    if(fim > (n-1)){
+        fim = n-1;
+        aux = 1;
+    }
+
     Item *itens = malloc(sizeof(Item)*n);
 
     for(int i=0; i<n; i++){
@@ -96,9 +100,9 @@ int main(void){
 
     quickSelect(itens, 0, n-1, inicio);
     quickSelect(itens, inicio+1, n-1, fim);
-    quicksortM3insertion(itens, inicio, fim);
+    quicksortm3insertion(itens, inicio, fim);
 
-    for(int i=inicio; i<fim; i++){
+    for(int i=inicio; i<fim+aux; i++){
         printf("%d\n", itens[i]);
     }
 
